@@ -7,7 +7,7 @@ ifndef GITHUB_REF_NAME
 else ifeq ("$(GITHUB_REF_NAME)", "master")
 	APP_VERSION := "latest"
 else ifeq ("$(GITHUB_REF_TYPE)", "tag")
-	APP_VERSION := $(shell cat version.sbt | cut -d\" -f2 | cut -d '-' -f1)
+	APP_VERSION := $(shell cat app.version)
 else
 	APP_VERSION := $(GITHUB_REF_NAME)
 endif
