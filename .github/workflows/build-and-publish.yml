@@ -13,7 +13,7 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
       - name: Build and Test
-        run: sbt test
+        run: make docker-build
 
   publish-to-docker-hub:
     if: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v') }}
