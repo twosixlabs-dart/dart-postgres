@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    image: docker.causeex.com/dart/corpex-psql/dev-version:latest
+    hostname: corpex-psql
+    container_name: corpex-psql
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      SU_USER: root
+      SU_PASSWORD: test
+      CORPEX_USER: corpex
+      CORPEX_PASSWORD: test
+      CORPEX_DB: corpex
+
+  pgweb:
+    container_name: pgweb
+    hostname: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - "7878:8081"
+    environment:
+      - DATABASE_URL=postgres://root:test@postgres:5432/corpex?sslmode=disable
+    depends_on:
+      - postgres
+
